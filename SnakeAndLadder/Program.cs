@@ -4,10 +4,10 @@ namespace SnakeAndLadder
 {
     class Program
     {
+        public const int START_POS = 0, FINISH_POS = 100;
         static void Main(string[] args)
         {
-            const int START_POS = 0, FINISH_POS = 100;
-            int curr_pos = 0;
+            int curr_pos = START_POS;
         }
     }
 }
