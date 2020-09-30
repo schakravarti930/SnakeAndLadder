@@ -35,7 +35,11 @@ namespace SnakeAndLadder
             {
                 int numOnDice = DiceRoll();
                 int stepsToMove = StepsToMove(numOnDice);
-                nextPosition = currentPosition + stepsToMove;
+                if (currentPosition + stepsToMove > FINISH_POS)
+                    nextPosition = currentPosition;
+                else
+                    nextPosition = currentPosition + stepsToMove;
+
                 if (nextPosition < START_POS)
                     currentPosition = START_POS;
                 else
