@@ -30,9 +30,18 @@ namespace SnakeAndLadder
         }
         static void Main(string[] args)
         {
-            int currentPosition = START_POS;
-            int numOnDice = DiceRoll();
-            int stepsToMove = StepsToMove(numOnDice);
+            int currentPosition = START_POS, nextPosition;
+            while(currentPosition < FINISH_POS)
+            {
+                int numOnDice = DiceRoll();
+                int stepsToMove = StepsToMove(numOnDice);
+                nextPosition = currentPosition + stepsToMove;
+                if (nextPosition < START_POS)
+                    currentPosition = START_POS;
+                else
+                    currentPosition = nextPosition;
+            }
+            Console.WriteLine($"Final Position is {currentPosition}");
         }
     }
 }
