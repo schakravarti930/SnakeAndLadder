@@ -31,9 +31,11 @@ namespace SnakeAndLadder
         static void Main(string[] args)
         {
             int currentPosition = START_POS, nextPosition;
+            int throws = 0;
             while(currentPosition < FINISH_POS)
             {
                 int numOnDice = DiceRoll();
+                throws++;
                 int stepsToMove = StepsToMove(numOnDice);
                 if (currentPosition + stepsToMove > FINISH_POS)
                     nextPosition = currentPosition;
@@ -44,8 +46,9 @@ namespace SnakeAndLadder
                     currentPosition = START_POS;
                 else
                     currentPosition = nextPosition;
+                Console.WriteLine($"The position after dice roll {throws} is {currentPosition}");
             }
-            Console.WriteLine($"Final Position is {currentPosition}");
+            Console.WriteLine($"Final Position is {currentPosition} and Total Number of Dice Rolls is {throws}");
         }
     }
 }
