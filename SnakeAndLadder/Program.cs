@@ -7,6 +7,7 @@ namespace SnakeAndLadder
         static void Main(string[] args)
         {
             const int START_POS = 0, FINISH_POS = 100;
+            int curr_pos = 0;
         }
     }
 }
