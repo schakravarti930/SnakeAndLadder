@@ -4,7 +4,7 @@ namespace SnakeAndLadder
 {
     class Program
     {
-        public const int START_POS = 0, FINISH_POS = 100;
+        public const int START_POS = 0, FINISH_POS = 10;
         public const int NO_PLAY = 0, LADDER = 1, SNAKE = 2;
         public static Random random = new Random();
         public static int DiceRoll()
@@ -30,25 +30,38 @@ namespace SnakeAndLadder
         }
         static void Main(string[] args)
         {
-            int currentPosition = START_POS, nextPosition;
-            int throws = 0;
-            while(currentPosition < FINISH_POS)
+            Player p1 = new Player("Player One");
+            Player p2 = new Player("Player Two");
+            Player currentPlayer = p1;
+            bool isGameFinished = false;
+            while (!isGameFinished)
             {
                 int numOnDice = DiceRoll();
-                throws++;
+                currentPlayer.throws++;
                 int stepsToMove = StepsToMove(numOnDice);
-                if (currentPosition + stepsToMove > FINISH_POS)
-                    nextPosition = currentPosition;
+                if (currentPlayer.currentPosition + stepsToMove == FINISH_POS)
+                {
+                    currentPlayer.nextPosition = FINISH_POS;
+                    isGameFinished = true;
+                }
+                else if (currentPlayer.currentPosition + stepsToMove > FINISH_POS)
+                    currentPlayer.nextPosition = currentPlayer.currentPosition;
                 else
-                    nextPosition = currentPosition + stepsToMove;
-
-                if (nextPosition < START_POS)
-                    currentPosition = START_POS;
+                    currentPlayer.nextPosition = currentPlayer.currentPosition + stepsToMove;
+                if (currentPlayer.nextPosition < START_POS)
+                    currentPlayer.currentPosition = START_POS;
                 else
-                    currentPosition = nextPosition;
-                Console.WriteLine($"The position after dice roll {throws} is {currentPosition}");
+                    currentPlayer.currentPosition = currentPlayer.nextPosition;
+                //Displaying Current Player Position After Every Dice Roll
+                Console.WriteLine($"{currentPlayer.Name}'s Position after dice roll {currentPlayer.throws} is {currentPlayer.currentPosition}");
+                // Continue Move if Ladder Occurs and Game is Not Finished
+                if (stepsToMove > 0 && !isGameFinished)
+                    continue;
+                //Switch Players
+                else if (!isGameFinished)
+                    currentPlayer = currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1;
             }
-            Console.WriteLine($"Final Position is {currentPosition} and Total Number of Dice Rolls is {throws}");
+            Console.WriteLine($"The Winner is {currentPlayer.Name} with Total Throws {currentPlayer.throws}");
         }
     }
 }
