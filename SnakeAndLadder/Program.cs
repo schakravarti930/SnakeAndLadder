@@ -4,7 +4,7 @@ namespace SnakeAndLadder
 {
     class Program
     {
-        public const int START_POS = 0, FINISH_POS = 10;
+        public const int START_POS = 0, FINISH_POS = 100;
         public const int NO_PLAY = 0, LADDER = 1, SNAKE = 2;
         public static Random random = new Random();
         public static int DiceRoll()
