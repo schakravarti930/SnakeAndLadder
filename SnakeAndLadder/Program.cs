@@ -59,7 +59,7 @@ namespace SnakeAndLadder
                     continue;
                 //Switch Players
                 else if (!isGameFinished)
-                    currentPlayer = currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1;
+                    currentPlayer = currentPlayer == p1 ?  p2 :  p1;
             }
             Console.WriteLine($"The Winner is {currentPlayer.Name} with Total Throws {currentPlayer.throws}");
         }
